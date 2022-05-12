@@ -1,3 +1,11 @@
+let allButtons = document.querySelectorAll('div.buttons button');
+let arr = [];
+
+allButtons.forEach(button => {
+    button.addEventListener('click', buttonValue);
+
+});
+
 function add(x,y){
 return x+y;
 }
@@ -25,3 +33,13 @@ if (operator === "+"){
     return divide(x,y);
 }
 }
+ 
+function buttonValue(x){
+    let value = Number(x.target.textContent);    
+    arr.push(value);
+    let number = arr.join('');
+    console.log(typeof arr[value]);
+    console.log(arr);
+    console.log(number);
+}
+

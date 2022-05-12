@@ -1,19 +1,21 @@
 body{
     background: powderblue;
     margin: 0;
-    padding: 0;
+    padding: 0;   
 }
 
 .calculator{
     display: flex;
     flex-direction: column;
     width: 40rem; 
-    height: 50rem;
     border: 2px solid goldenrod;
+    font-family: 'Orbitron';
+    font-size: 30px;
+    text-align: right;
+    margin: auto;
 
 }
 .display{
-    height: 40px;
     width: 100%;
     border: 2px solid goldenrod;
     background-color: mediumspringgreen;
@@ -25,6 +27,10 @@ body{
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     gap: 5px 5px;
+    
+}
+.button{
+    font-family: 'Orbitron';
 }
 
 .add{
