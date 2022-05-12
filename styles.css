@@ -1,0 +1,32 @@
+body{
+    background: powderblue;
+    margin: 0;
+    padding: 0;
+}
+
+.calculator{
+    display: flex;
+    flex-direction: column;
+    width: 40rem; 
+    height: 50rem;
+    border: 2px solid goldenrod;
+
+}
+.display{
+    height: 40px;
+    width: 100%;
+    border: 2px solid goldenrod;
+    background-color: mediumspringgreen;
+    box-sizing: border-box;
+}
+
+.buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px 5px;
+}
+
+.add{
+    grid-row: span 2;
+}
