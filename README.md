@@ -8,4 +8,7 @@ This is the calculator project from The Odin Project's Javascript Foundations co
 - string together several operations 
 - add keyboard support  
 
-# Areas for Improvement
+# What I Learned
+
+- how to run a function only once on page load
+- another way to both write to a variable with a function and access/rewrite that data later

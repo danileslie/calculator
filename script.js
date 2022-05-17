@@ -8,6 +8,7 @@ let number;
 let number2;
 let xValueSet = false;
 
+
 function getXValue() {
     
         numberButtons.forEach(button => {
@@ -75,17 +76,24 @@ function operator(){
     operate();
     getYValue();
     xValueSet = true;
+    if (number2 != undefined){
+        number = number2;
+    console.log(number);
+    }
 }
 
 function operate(){
     console.log(`Operate in progress. Current X value is ${number}`);
     console.log(`Second operate in progress. Current Y value is ${number2}`);
+    console.log(`Solution is ${add(number, number2)}`)
+    arr2 = [];  
 }
 
 function clearDisplay(){
     display.value = '';
     arr = [];
     arr2 = [];
+    xValueSet = false;
 }
 
 
