@@ -1,18 +1,21 @@
 let numberButtons = document.querySelectorAll('div.buttons .number');
 let operatorButtons = document.querySelectorAll('div.buttons .operator');
+let equalButton = document.querySelector('.equal');
+let clearButton = document.querySelector('.clear');
 let display = document.querySelector('.display');
 
 let arr = [];
 let arr2 = [];
-let number;
-let number2;
+let number = 0;
+let number2 = undefined;
 let xValueSet = false;
+let equalPressed = false;
+let solution = undefined;
 
 
 function getXValue() {
-    
         numberButtons.forEach(button => {
-            button.addEventListener('click', xValue);    
+        button.addEventListener('click', xValue);    
         });      
 }
 getXValue();
@@ -28,8 +31,13 @@ operatorButtons.forEach(button => {
     button.addEventListener('click', operator);
 });
 
+// equalButton.addEventListener('click', equal);
+
+clearButton.addEventListener('click', clearDisplay);
+
 function add(x,y){
-return x+y;
+    let solution = x + y;
+return solution;
 }
 
 // function subtract(x,y){
@@ -62,7 +70,7 @@ function xValue(x){
         arr.push(value);
         number = Number(arr.join(''));
         display.textContent = number;  
-    }          
+    }        
 }
 
 function yValue(y){ 
@@ -73,27 +81,35 @@ function yValue(y){
 }
 
 function operator(){
-    operate();
-    getYValue();
+    solution = add(number, number2)
     xValueSet = true;
+    getYValue();
     if (number2 != undefined){
-        number = number2;
-    console.log(number);
+        add(number, number2)
+        console.log(number);
+        console.log(number2);
+        if(solution != undefined){
+            number = solution;
+        }
+        display.textContent = solution;
     }
-}
-
-function operate(){
-    console.log(`Operate in progress. Current X value is ${number}`);
-    console.log(`Second operate in progress. Current Y value is ${number2}`);
-    console.log(`Solution is ${add(number, number2)}`)
-    arr2 = [];  
+    arr2 = [];
 }
 
 function clearDisplay(){
-    display.value = '';
     arr = [];
     arr2 = [];
-    xValueSet = false;
+    number = 0;
+    number2 = undefined;     
 }
+
+
+// hitting operator button first makes it impossible to assign a starting x value
+
+// write if statement that either throws an error when operator button is clicked, or assigns the 
+// next input to the x value
+
+
+
 
 
