@@ -9,9 +9,9 @@ let arr2 = [];
 let number = 0;
 let number2 = undefined;
 let xValueSet = false;
-let equalPressed = false;
-let solution = undefined;
-
+let operator1 = null;
+let operator2 = null;
+let displayContent = 0;
 
 function getXValue() {
         numberButtons.forEach(button => {
@@ -20,50 +20,25 @@ function getXValue() {
 }
 getXValue();
 
-
 function getYValue() {
     numberButtons.forEach(button => {
     button.addEventListener('click', yValue);
 });
 }
 
-operatorButtons.forEach(button => {
-    button.addEventListener('click', operator);
-});
-
-// equalButton.addEventListener('click', equal);
-
-clearButton.addEventListener('click', clearDisplay);
-
-function add(x,y){
-    let solution = x + y;
-return solution;
+function operatorClicked(){
+    for (let i = 0; i < operatorButtons.length; i++){
+        operatorButtons[i].addEventListener('click', function(){
+            if (operatorButtons[i].classList.contains('operator')){
+                let operator = operatorButtons[i].value;
+                insertOperator(operator);    
+        }
+    })
+}
 }
 
-// function subtract(x,y){
-//     return x-y;
-// }
+operatorClicked();
 
-// function multiply(x,y){
-//     return x*y;
-// }
-
-// function divide(x,y){
-//     return x/y;
-// }
-
-// function operate(x, y, operator){
-// if (operator === "+"){
-//     return add(x,y);
-// } else if (operator === "-"){
-//     return subtract(x,y);
-// } else if (operator === "*"){
-//     return multiply(x,y);
-// } else {
-//     return divide(x,y);
-// }
-// }
- 
 function xValue(x){
     if (!xValueSet){
         let value = (x.target.textContent);    
@@ -80,34 +55,64 @@ function yValue(y){
     display.textContent = number2; 
 }
 
-function operator(){
-    solution = add(number, number2)
+function insertOperator(operator){
+    let solution = operate(number, number2, operator);  
+    let result;      
+    if (operator1 != null && operator2 === null){
+        operator2 = operator1;
+        result = operate(number, number2, operator2);
+        display.textContent = result;
+        number = result;  
+    } else if (operator1 != null && operator2 != null){
+    result = operate(number, number2, operator1);
+    operator1 = operator;
+    display.textContent = result;
+    number = result;
+
+    }
+    else{
+        operator1 = operator; 
+    }
+    arr2 = [];    
+    console.log(`Result: ${result}, Number one: ${number}, Number 2: ${number2}`);
+}
+
+function operate(x, y, operator){
     xValueSet = true;
     getYValue();
-    if (number2 != undefined){
-        add(number, number2)
-        console.log(number);
-        console.log(number2);
-        if(solution != undefined){
-            number = solution;
-        }
-        display.textContent = solution;
-    }
-    arr2 = [];
+    if (operator === '+'){
+        return x + y;   
+    } else if (operator === '-'){
+        return x - y;
+    } else if (operator === '*'){ 
+        return x * y;
+    } else {
+        return x / y;       
+    }   
 }
 
-function clearDisplay(){
-    arr = [];
-    arr2 = [];
-    number = 0;
-    number2 = undefined;     
-}
+// // equalButton.addEventListener('click', equal);
 
+// clearButton.addEventListener('click', clearDisplay);
 
-// hitting operator button first makes it impossible to assign a starting x value
+// // function updateDisplay(){
+// //     display.innerText = displayContent; 
+// // }
+// // updateDisplay();
 
-// write if statement that either throws an error when operator button is clicked, or assigns the 
-// next input to the x value
+// function clearDisplay(){
+//     arr = [];
+//     arr2 = [];
+//     number = 0;
+//     number2 = undefined; 
+//     updateDisplay();    
+// }
+
+// // equal button needs to run operate and then do nothing else until another operator + value is inputted
+// // hitting operator button first makes it impossible to assign a starting x value
+
+// // write if statement that either throws an error when operator button is clicked, or assigns the 
+// // next input to the x value
 
 
 
