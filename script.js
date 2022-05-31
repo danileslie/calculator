@@ -2,6 +2,7 @@ let numberButtons = document.querySelectorAll('div.buttons .number');
 let operatorButtons = document.querySelectorAll('div.buttons .operator');
 let equalButton = document.querySelector('.equal');
 let clearButton = document.querySelector('.clear');
+let decimalButton = document.querySelector('.decimal');
 let display = document.querySelector('.display');
 
 let arr = [];
@@ -11,7 +12,10 @@ let number2 = undefined;
 let xValueSet = false;
 let operator1 = null;
 let operator2 = null;
-let displayContent = 0;
+let displayContent = '0';
+let decimalSet = false;
+
+decimalButton.addEventListener('click', addDecimal);
 
 function getXValue() {
         numberButtons.forEach(button => {
@@ -45,7 +49,9 @@ function xValue(x){
         arr.push(value);
         number = Number(arr.join(''));
         display.textContent = number;  
-    }        
+         
+    }  
+         
 }
 
 function yValue(y){ 
@@ -91,22 +97,36 @@ function operate(x, y, operator){
     }   
 }
 
+function addDecimal(){
+    let decimalSymbol = decimalButton.textContent;
+    // if (display.textContent === number || display.textContent == number2){
+    // display.textContent += decimalSymbol;
+
+    // } else 
+    if (!display.textContent.includes(decimalSymbol) && decimalSet === false){
+        let update = display.textContent += decimalSymbol;
+        number = update;
+        console.log(number);
+        decimalSet = true;
+    }
+}
+
 // // equalButton.addEventListener('click', equal);
 
-// clearButton.addEventListener('click', clearDisplay);
+clearButton.addEventListener('click', clearDisplay);
 
-// // function updateDisplay(){
-// //     display.innerText = displayContent; 
-// // }
-// // updateDisplay();
+function updateDisplay(){
+    display.innerText = displayContent; 
+}
+updateDisplay();
 
-// function clearDisplay(){
-//     arr = [];
-//     arr2 = [];
-//     number = 0;
-//     number2 = undefined; 
-//     updateDisplay();    
-// }
+function clearDisplay(){
+    arr = [];
+    arr2 = [];
+    number = 0;
+    number2 = undefined; 
+    updateDisplay();    
+}
 
 // // equal button needs to run operate and then do nothing else until another operator + value is inputted
 // // hitting operator button first makes it impossible to assign a starting x value
