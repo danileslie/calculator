@@ -119,6 +119,7 @@ let firstNumber = undefined;
 let secondNumber = undefined;
 let firstOperator = undefined;
 let secondOperator = undefined;
+let decimalSet = false;
 let solution = undefined;
 let displayContent = 0;
 
@@ -130,11 +131,17 @@ function buttonPress(){
             if (allButtons[i].classList.contains('number')){
                 getValue(allButtons[i].value);
                 updateDisplay();
+            } else if (allButtons[i].classList.contains('decimal')){
+                    getDecimal();
+                    updateDisplay();
             } else if (allButtons[i].classList.contains('operator')){
                 getOperator(allButtons[i].value); 
                 updateDisplay();   
             } else if (allButtons[i].classList.contains('equal')){
                 getEqual();
+                updateDisplay();
+            }else if (allButtons[i].classList.contains('clear')){
+                clearDisplay();
                 updateDisplay();
             }
         });    
@@ -171,7 +178,6 @@ function clearDisplay(){
     secondNumber = undefined;
     firstOperator = undefined;
     secondOperator = undefined;
-    xValueSet = false;
     displayContent = 0;   
 }
 
@@ -180,15 +186,16 @@ function getValue(value){
         // assigning first value
         if (displayContent === 0 || displayContent === '0'){
             displayContent = value;       
-        } 
-        else {
+        } else {
             displayContent += value;
         }    
     } else {
         // assigning every other value (to second number)
+        decimalSet = false;
        if (displayContent === firstNumber){
+           
             displayContent = value;
-        } else{
+        } else {
             displayContent += value;
         }
     }
@@ -218,8 +225,29 @@ function getOperator(operator){
 }
 
 function getEqual(){
+    if (firstNumber === undefined){
+        displayContent = displayContent;
+    } else {
     // runs operate on equal press
     secondNumber = displayContent;
     solution = operate(Number(firstNumber), Number(secondNumber), firstOperator);
     displayContent = solution;
 }
+// resets after equal press
+firstNumber = displayContent;
+secondNumber = undefined;
+firstOperator = undefined;
+secondOperator = undefined;
+solution = undefined;
+}
+
+function getDecimal(){
+    if (!decimalSet){
+        displayContent += '.';
+        decimalSet = true; 
+    }   
+}
+
+// clear info after hitting equal or it adds to last number
+// equal function throws undefined if clicked before value is inputted
+//function throws NaN after 'nice try'
