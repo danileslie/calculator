@@ -137,10 +137,17 @@ function buttonPress(){
             } else if (allButtons[i].classList.contains('operator')){
                 getOperator(allButtons[i].value); 
                 updateDisplay();   
-            } else if (allButtons[i].classList.contains('equal')){
+            } else if (allButtons[i].classList.contains('posNeg')){
+                getPosNeg();
+                updateDisplay();
+            } else if (allButtons[i].classList.contains('backSpace')){
+               getBackSpace();
+               updateDisplay();
+            } 
+            else if (allButtons[i].classList.contains('equal')){
                 getEqual();
                 updateDisplay();
-            }else if (allButtons[i].classList.contains('clear')){
+            } else if (allButtons[i].classList.contains('clear')){
                 clearDisplay();
                 updateDisplay();
             }
@@ -248,6 +255,15 @@ function getDecimal(){
     }   
 }
 
-// clear info after hitting equal or it adds to last number
-// equal function throws undefined if clicked before value is inputted
-//function throws NaN after 'nice try'
+function getPosNeg(){
+displayContent *= -1;
+}
+
+function getBackSpace(){
+    // ensuring there will always be a number in the display
+    if (displayContent.length <= 1){
+    displayContent = 0;
+    } else {
+    displayContent = displayContent.slice(0, -1);
+    }
+}
