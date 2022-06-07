@@ -47,9 +47,10 @@ function operate(x, y, operator){
     } else if (operator === '*'){ 
         return x * y;
     } else if (operator === '/'){
-        if (y === 0){
-            return 'Nice try :)';
+        if (y === 0){  
+            return `Nice try!`;
         } else {
+            console.log(x / y); 
             return x / y;
         }          
     }   
